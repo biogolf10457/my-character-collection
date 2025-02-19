@@ -8,9 +8,13 @@ const Navbar = () => {
         <div>
           <Link to="/">Icon</Link>
         </div>
-        <div className="flex space-x-4">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+        <div className="flex space-x-10">
+          <Link className="font-chewy text-lg" to="/login">
+            Login
+          </Link>
+          <Link className="font-chewy text-lg" to="/register">
+            Register
+          </Link>
         </div>
       </div>
     </div>
