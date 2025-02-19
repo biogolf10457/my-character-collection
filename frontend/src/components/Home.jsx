@@ -2,10 +2,10 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className="min-h-[100vh] px-4 sm:px-8 lg:px-12 bg-amber-200">
+    <div className="min-h-[100vh] px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-amber-200">
       <div className="flex flex-col lg:flex-row items-center justify-around">
-        <div className="w-[85%] lg:w-[40%] bg-amber-900">Image</div>
-        <div className="w-[85%] lg:w-[40%] bg-amber-900">
+        <div className="w-[75%] lg:w-[40%] bg-amber-900">Image</div>
+        <div className="w-[75%] lg:w-[40%] bg-amber-900">
           <h1 className="font-chewy text-2xl lg:text-3xl text-center">
             Welcome to{" "}
             <span className="text-nowrap">My Character Collection</span>
