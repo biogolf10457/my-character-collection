@@ -4,3 +4,7 @@
   --font-roboto: "Roboto", serif;
   --font-chewy: "Chewy", serif;
 }
+
+.button {
+  @apply px-5 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-roboto font-bold bg-amber-500 hover:bg-amber-600 cursor-pointer;
+}
