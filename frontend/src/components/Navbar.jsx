@@ -8,20 +8,23 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         <div>
           <Link to="/">
-            <div className="h-10 flex items-center space-x-3">
+            <div className="h-6 lg:h-10 flex items-center space-x-3">
               <img src={mascotIcon} className="h-full" />
-              <div className="font-chewy text-xl text-amber-50 uppercase">
+              <div className="font-chewy text-lg lg:text-xl text-amber-50 uppercase">
                 My Character Collection
               </div>
             </div>
           </Link>
         </div>
-        <div className="flex space-x-10">
+        <div className="flex space-x-6 lg:space-x-10">
           <Link className="font-chewy text-lg" to="/login">
             Login
           </Link>
           <Link className="font-chewy text-lg" to="/register">
             Register
+          </Link>
+          <Link className="font-chewy text-lg" to="/profile">
+            Profile
           </Link>
         </div>
       </div>

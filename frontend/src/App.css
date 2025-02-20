@@ -16,3 +16,16 @@
 .input {
   @apply w-full px-4 py-2 bg-amber-50 focus:bg-amber-100 rounded-xl outline-amber-600 focus:outline-amber-700 outline-2 inset-shadow-sm;
 }
+
+.loading-spin {
+  @apply w-10 h-10 border-slate-100 border-b-transparent border-4 rounded-full;
+  animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
