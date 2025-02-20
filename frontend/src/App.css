@@ -6,13 +6,13 @@
 }
 
 .button {
-  @apply px-5 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-roboto font-bold bg-amber-500 hover:bg-amber-600 cursor-pointer;
+  @apply px-5 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-roboto font-bold bg-amber-500 hover:bg-amber-600 cursor-pointer shadow-md;
 }
 
 .button2 {
-  @apply px-5 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-roboto font-bold bg-amber-100 hover:bg-amber-200 cursor-pointer;
+  @apply px-5 py-3 lg:px-6 lg:py-4 rounded-2xl text-base lg:text-xl font-roboto font-bold bg-amber-100 hover:bg-amber-200 cursor-pointer shadow-md;
 }
 
 .input {
-  @apply w-full px-4 py-2 bg-amber-50 focus:bg-amber-100 rounded-xl outline-amber-600 focus:outline-amber-700 outline-2;
+  @apply w-full px-4 py-2 bg-amber-50 focus:bg-amber-100 rounded-xl outline-amber-600 focus:outline-amber-700 outline-2 inset-shadow-sm;
 }

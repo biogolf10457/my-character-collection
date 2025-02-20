@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="min-h-[100vh] px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
+    <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex flex-col lg:flex-row items-center justify-around space-y-10 lg:space-y-0">
         <div className="w-[55%] lg:w-[35%]">
           <img src={mascot} className="w-full object-contain" />

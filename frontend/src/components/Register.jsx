@@ -13,9 +13,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[100vh] px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
+    <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex items-center justify-center">
-        <div className="w-lg px-8 py-8 bg-amber-400 rounded-xl">
+        <div className="w-lg px-8 py-8 bg-amber-400 rounded-xl shadow-lg">
           <h1 className="mb-10 text-4xl text-center font-chewy">Register</h1>
           <form className="w-full flex flex-col items-center justify-center">
             <label htmlFor="username" className="sr-only">
