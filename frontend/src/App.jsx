@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import CharacterProfile from "./components/CharacterProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createcharacter" element={<CreateCharacter />} />
+          <Route path="/characterprofile/:id" element={<CharacterProfile />} />
         </Routes>
       </div>
     </Router>
