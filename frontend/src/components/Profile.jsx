@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import CharacterCard from "./CharacterCard";
 
 const Profile = () => {
   const [name, setName] = useState("");
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState([""]);
   const [loaded, setLoaded] = useState(true);
 
   return (
@@ -27,8 +28,8 @@ const Profile = () => {
               </div>
             )}
             {loaded && characters.length > 0 && (
-              <div className="absolute top-1/2 left-1/2 -translate-1/2">
-                test
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <CharacterCard name="Name Surname" />
               </div>
             )}
           </div>
