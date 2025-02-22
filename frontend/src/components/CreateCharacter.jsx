@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
+import UploadImageModal from "./UploadImageModal";
 
 const CreateCharacter = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const CreateCharacter = () => {
     information: "",
     image: "",
   });
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,6 +28,10 @@ const CreateCharacter = () => {
     });
   };
 
+  const imageChange = (changedImage) => {
+    setFormData({ ...formData, image: changedImage });
+  };
+
   useEffect(() => {
     console.log(formData);
   }, [formData]);
@@ -34,7 +41,13 @@ const CreateCharacter = () => {
     if (!file) return;
   };
   return (
-    <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
+    <div className="relative min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
+      {modalOpen && (
+        <UploadImageModal
+          imageChange={imageChange}
+          closeModal={() => setModalOpen(false)}
+        />
+      )}
       <div className="flex items-center justify-center mb-6">
         <h1 className="font-chewy text-3xl">Create Character</h1>
       </div>
@@ -42,16 +55,19 @@ const CreateCharacter = () => {
         <div className="w-full flex">
           <div className="w-1/3 flex flex-col items-center justify-center">
             <div className="relative w-1/2 aspect-square ">
-              <div className="w-full h-full bg-amber-300 rounded-full border-amber-900 border-4 overflow-hidden">
+              <div className="w-full h-full bg-white rounded-full border-amber-900 border-4 overflow-hidden">
                 <img
                   className="w-full h-full object-contain"
                   src={formData.image === "" ? noImage : formData.image}
                   alt="character image"
                 />
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1 bg-slate-200  hover:bg-slate-300 rounded-full border-2 border-slate-400  hover:cursor-pointer">
+              <button
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1 bg-slate-200  hover:bg-slate-300 rounded-full border-2 border-slate-400  hover:cursor-pointer"
+                onClick={() => setModalOpen(true)}
+              >
                 <MdEdit />
-              </div>
+              </button>
             </div>
             <div className="pt-6 text-2xl font-chewy">
               <input
@@ -121,6 +137,7 @@ const CreateCharacter = () => {
             <textarea
               name="information"
               value={formData.information}
+              placeholder="character information"
               onChange={handleChange}
               className="w-full min-h-full p-2 bg-white rounded-md"
             />
