@@ -7,10 +7,6 @@ const CreateCharacter = () => {
   };
   return (
     <div>
-      <h1>Create Character</h1>
-      <form>
-        <input type="file" accept="image/*" onChange={onSelectFile} />
-      </form>
     </div>
   );
 };
