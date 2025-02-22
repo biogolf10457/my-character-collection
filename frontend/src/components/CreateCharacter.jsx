@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
+import noImage from "../assets/noImage.jpg";
 
 const CreateCharacter = () => {
   const [formData, setFormData] = useState({
@@ -40,12 +41,28 @@ const CreateCharacter = () => {
       <div className="relative px-4 py-8 bg-orange-300 rounded-2xl shadow-lg">
         <div className="w-full flex">
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <div className="relative w-1/2 aspect-square bg-amber-300 rounded-full inset-shadow-sm">
+            <div className="relative w-1/2 aspect-square ">
+              <div className="w-full h-full bg-amber-300 rounded-full border-amber-900 border-4 overflow-hidden">
+                <img
+                  className="w-full h-full object-contain"
+                  src={formData.image === "" ? noImage : formData.image}
+                  alt="character image"
+                />
+              </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1 bg-slate-200  hover:bg-slate-300 rounded-full border-2 border-slate-400  hover:cursor-pointer">
                 <MdEdit />
               </div>
             </div>
-            <div className="pt-6 text-2xl font-chewy">Name</div>
+            <div className="pt-6 text-2xl font-chewy">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                placeholder="Character Name"
+                onChange={handleChange}
+                className="bg-white rounded-md text-center"
+              />
+            </div>
             <div className="pt-6 w-3/4 grid grid-cols-2 gap-y-2 text-lg font-roboto">
               <label htmlFor="gender">Gender : </label>
               <select
@@ -105,7 +122,7 @@ const CreateCharacter = () => {
               name="information"
               value={formData.information}
               onChange={handleChange}
-              className="w-full min-h-full bg-white rounded-md"
+              className="w-full min-h-full p-2 bg-white rounded-md"
             />
           </div>
         </div>
