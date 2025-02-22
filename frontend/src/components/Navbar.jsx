@@ -17,14 +17,14 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex space-x-6 lg:space-x-10">
-          <Link className="font-chewy text-lg" to="/login">
-            Login
+          <Link to="/login">
+            <span className="navMenuItem">Login</span>
           </Link>
-          <Link className="font-chewy text-lg" to="/register">
-            Register
+          <Link to="/register">
+            <span className="navMenuItem">Register</span>
           </Link>
-          <Link className="font-chewy text-lg" to="/profile">
-            Profile
+          <Link to="/profile">
+            <span className="navMenuItem">Profile</span>
           </Link>
         </div>
       </div>
