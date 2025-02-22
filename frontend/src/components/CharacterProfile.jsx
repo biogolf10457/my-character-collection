@@ -7,7 +7,7 @@ const CharacterProfile = () => {
   return (
     <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex justify-end pr-2 pb-2">
-        <Link to="/characterprofile/:id/edit">
+        <Link to="/characterprofile/testid/edit">
           <button className="pl-2.5 pr-2 pt-1 pb-2 bg-slate-200 rounded-lg hover:bg-slate-300 hover:cursor-pointer">
             <FaEdit className="inline-block align-middle" />
             <span className="pl-1 align-middle">Edit</span>
