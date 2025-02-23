@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -12,12 +14,35 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      alert(data.message);
+
+      if (data.success) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex items-center justify-center">
         <div className="w-lg px-8 py-8 bg-amber-400 rounded-xl shadow-lg">
           <h1 className="mb-10 text-4xl text-center font-chewy">Register</h1>
-          <form className="w-full flex flex-col items-center justify-center">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex flex-col items-center justify-center"
+          >
             <label htmlFor="username" className="sr-only">
               Username:
             </label>
