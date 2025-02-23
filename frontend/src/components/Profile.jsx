@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard";
 import { PiPersonArmsSpreadDuotone } from "react-icons/pi";
@@ -8,6 +7,24 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [characters, setCharacters] = useState([""]);
   const [loaded, setLoaded] = useState(true);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:3000/api/protected", {
+          method: "GET",
+          headers: { "x-auth-token": token },
+        });
+        const data = await res.json();
+        setName(data.user.username);
+        console.log(data.user);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
