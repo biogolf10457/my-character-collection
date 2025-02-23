@@ -9,6 +9,7 @@ const characterSchema = new mongoose.Schema(
     weight: { type: String, required: true },
     image: { type: String, required: true },
     information: { type: String, required: true },
+    ownerid: { type: String, required: true },
   },
   { timestamps: true }
 );

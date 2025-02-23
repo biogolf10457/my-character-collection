@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -11,17 +11,27 @@ import Register from "./components/Register";
 import Profile from "./components/Profile";
 import CharacterProfile from "./components/CharacterProfile";
 import CharacterProfileEdit from "./components/CharacterProfileEdit";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [auth, setAuth] = useState(!!localStorage.getItem("token"));
+
   return (
     <Router>
       <Navbar />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setAuth={setAuth}/>} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/createcharacter" element={<CreateCharacter />} />
           <Route path="/characterprofile/:id" element={<CharacterProfile />} />
           <Route
