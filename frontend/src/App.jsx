@@ -12,18 +12,33 @@ import Profile from "./components/Profile";
 import CharacterProfile from "./components/CharacterProfile";
 import CharacterProfileEdit from "./components/CharacterProfileEdit";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 function App() {
   const [auth, setAuth] = useState(!!localStorage.getItem("token"));
 
   return (
     <Router>
-      <Navbar />
+      <Navbar auth={auth} setAuth={setAuth} />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login setAuth={setAuth}/>} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login setAuth={setAuth} />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
           <Route
             path="/profile"
             element={
@@ -32,11 +47,29 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/createcharacter" element={<CreateCharacter />} />
-          <Route path="/characterprofile/:id" element={<CharacterProfile />} />
+          <Route
+            path="/createcharacter"
+            element={
+              <ProtectedRoute>
+                <CreateCharacter />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/characterprofile/:id"
+            element={
+              <ProtectedRoute>
+                <CharacterProfile />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/characterprofile/:id/edit"
-            element={<CharacterProfileEdit />}
+            element={
+              <ProtectedRoute>
+                <CharacterProfileEdit />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </div>

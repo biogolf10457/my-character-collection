@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import mascotIcon from "../assets/mccIcon.png";
 import { MdLogout } from "react-icons/md";
 
-const Navbar = () => {
+const Navbar = ({ auth, setAuth }) => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  const handleLogout = async () => {
+    await localStorage.removeItem("token");
+    await setAuth(false);
     navigate("/");
   };
   return (
@@ -23,21 +24,28 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex space-x-6 lg:space-x-10">
-          <Link to="/login">
-            <span className="navMenuItem">Login</span>
-          </Link>
-          <Link to="/register">
-            <span className="navMenuItem">Register</span>
-          </Link>
-          <Link to="/profile">
-            <span className="navMenuItem">Profile</span>
-          </Link>
-          <button
-            className="text-2xl hover:text-amber-50 transition-all cursor-pointer"
-            onClick={handleLogout}
-          >
-            <MdLogout />
-          </button>
+          {!auth ? (
+            <>
+              <Link to="/login">
+                <span className="navMenuItem">Login</span>
+              </Link>
+              <Link to="/register">
+                <span className="navMenuItem">Register</span>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/profile">
+                <span className="navMenuItem">Profile</span>
+              </Link>
+              <button
+                className="text-2xl hover:text-amber-50 transition-all cursor-pointer"
+                onClick={handleLogout}
+              >
+                <MdLogout />
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
