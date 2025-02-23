@@ -6,6 +6,7 @@ import { MdLogout } from "react-icons/md";
 const Navbar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate("/");
   };
   return (
