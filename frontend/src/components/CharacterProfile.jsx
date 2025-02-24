@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import noImage from "../assets/noImage.jpg";
 
 const CharacterProfile = () => {
   const { id } = useParams();
+  const [characterData, setCharacterData] = useState({
+    name: "",
+    gender: "",
+    age: "",
+    height: "",
+    weight: "",
+    information: "",
+    image: "",
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(
+        `http://localhost:3000/api/characterprofile/${id}`,
+        { method: "GET" }
+      );
+      const data = await res.json();
+      setCharacterData({
+        name: data.data.name,
+        gender: data.data.gender,
+        age: data.data.age,
+        height: data.data.height,
+        weight: data.data.weight,
+        information: data.data.information,
+        image: data.data.image,
+      });
+    }
+    fetchData();
+  }, []);
   return (
     <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex justify-end pr-2 pb-2">
@@ -17,29 +47,42 @@ const CharacterProfile = () => {
       <div className="relative min-h-[70vh] px-4 py-8 bg-orange-300 rounded-2xl shadow-lg">
         <div className="w-full flex">
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <div className="w-1/2 aspect-square bg-amber-300 rounded-full inset-shadow-sm"></div>
-            <div className="pt-6 text-2xl font-chewy">Name</div>
-            <div className="pt-6 w-1/2 grid grid-cols-2 gap-y-2 text-lg font-roboto">
+            <div className="w-1/2 aspect-square bg-white rounded-full border-amber-900 border-4 overflow-hidden">
+              <img
+                className="w-full h-full object-contain"
+                src={characterData.image === "" ? noImage : characterData.image}
+                alt="character image"
+              />
+            </div>
+            <div className="pt-6 text-2xl font-chewy">{characterData.name}</div>
+            <div className="pt-6 w-2/3 grid grid-cols-2 gap-y-2 text-lg font-roboto">
               <div>Gender : </div>
-              <div>Male</div>
+              <div>
+                {characterData.gender === "" ? "-" : `${characterData.gender}`}
+              </div>
               <div>Age : </div>
-              <div>22 years</div>
+              <div>
+                {characterData.age === "" ? "-" : `${characterData.age} years`}
+              </div>
               <div>Height : </div>
-              <div>168 cm</div>
+              <div>
+                {characterData.height === ""
+                  ? "-"
+                  : `${characterData.height} cm`}
+              </div>
               <div>Weight : </div>
-              <div>59 kg</div>
+              <div>
+                {characterData.weight === ""
+                  ? "-"
+                  : `${characterData.weight} kg`}
+              </div>
             </div>
           </div>
           <div className="w-2/3">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-              laboriosam quo facilis adipisci dolorum alias dicta repellat saepe
-              quos, voluptas facere itaque quibusdam numquam ratione
-              necessitatibus! Et ut temporibus atque! Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit. Voluptatem tenetur error,
-              quisquam sequi consequatur magni, doloremque nulla hic, inventore
-              harum vitae nesciunt praesentium sapiente consequuntur est
-              mollitia autem nemo placeat?
+              {characterData.information === ""
+                ? "No information."
+                : characterData.information}
             </p>
           </div>
         </div>
