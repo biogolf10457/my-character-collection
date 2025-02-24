@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
 
 const CharacterProfile = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [characterData, setCharacterData] = useState({
     name: "",
     gender: "",
@@ -15,6 +16,20 @@ const CharacterProfile = () => {
     information: "",
     image: "",
   });
+
+  const handleDelete = async () => {
+    const res = await fetch(
+      `http://localhost:3000/api/characterprofile/${id}/delete`,
+      { method: "DELETE" }
+    );
+
+    const data = await res.json();
+    if (!data.success) {
+      alert(data.message);
+    } else {
+      navigate("/profile");
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -50,6 +65,7 @@ const CharacterProfile = () => {
         <button
           type="button"
           className="pl-2.5 pr-2 pt-1 pb-2 bg-red-400 rounded-lg hover:bg-red-500 hover:cursor-pointer inset-shadow-2xs"
+          onClick={handleDelete}
         >
           <MdDeleteForever className="text-lg inline-block align-middle" />
           <span className="pl-1 align-middle">Delete</span>
