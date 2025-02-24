@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
 import UploadImageModal from "./UploadImageModal";
+import { useNavigate } from "react-router-dom";
 
 const CreateCharacter = ({ userid }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -76,8 +78,22 @@ const CreateCharacter = ({ userid }) => {
         information: formData.information,
         ownerid: userid,
       };
-
       console.log(submitData);
+
+      const createCharacterRes = await fetch(
+        "http://localhost:3000/api/createcharacter",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(submitData),
+        }
+      );
+      const createCharacterData = await createCharacterRes.json();
+      if (!createCharacterData.success) {
+        alert(createCharacterData.message);
+      } else {
+        navigate("/profile");
+      }
     } catch (error) {
       console.error(error.message);
     }
@@ -89,13 +105,13 @@ const CreateCharacter = ({ userid }) => {
   };
   return (
     <div className="relative min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
-      {modalOpen && (
-        <UploadImageModal
-          imageChange={imageChange}
-          closeModal={() => setModalOpen(false)}
-        />
-      )}
       <form onSubmit={handleSubmit}>
+        {modalOpen && (
+          <UploadImageModal
+            imageChange={imageChange}
+            closeModal={() => setModalOpen(false)}
+          />
+        )}
         <div className="flex items-center justify-center mb-6">
           <h1 className="font-chewy text-3xl">Create Character</h1>
         </div>

@@ -43,7 +43,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute setAuth={setAuth}>
+              <ProtectedRoute>
                 <Profile setUserid={setUserid} />
               </ProtectedRoute>
             }
@@ -51,7 +51,7 @@ function App() {
           <Route
             path="/createcharacter"
             element={
-              <ProtectedRoute setAuth={setAuth}>
+              <ProtectedRoute>
                 <CreateCharacter userid={userid} />
               </ProtectedRoute>
             }
@@ -59,7 +59,7 @@ function App() {
           <Route
             path="/characterprofile/:id"
             element={
-              <ProtectedRoute setAuth={setAuth}>
+              <ProtectedRoute>
                 <CharacterProfile />
               </ProtectedRoute>
             }
@@ -67,7 +67,7 @@ function App() {
           <Route
             path="/characterprofile/:id/edit"
             element={
-              <ProtectedRoute setAuth={setAuth}>
+              <ProtectedRoute>
                 <CharacterProfileEdit />
               </ProtectedRoute>
             }

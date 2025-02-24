@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-const ProtectedRoute = ({ children, setAuth }) => {
+const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -19,7 +19,6 @@ const ProtectedRoute = ({ children, setAuth }) => {
       console.error("Invalid token:", error);
     }
   }
-  setAuth(false);
   return <Navigate to="/login" />;
 };
 
