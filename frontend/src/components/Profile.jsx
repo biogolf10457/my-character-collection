@@ -21,6 +21,13 @@ const Profile = ({ setUserid }) => {
         setUserid(data.user.id);
         setLoaded(true);
         console.log(data.user);
+        const res2 = await fetch(
+          `http://localhost:3000/api/charactercollection/${data.user.id}`,
+          { method: "GET" }
+        );
+        const data2 = await res2.json();
+        setCharacters(data2.data);
+        console.log(data2.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -55,13 +62,15 @@ const Profile = ({ setUserid }) => {
                 </span>
               </div>
             )}
-            {loaded && characters.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Link to="/characterprofile/testid">
-                  <CharacterCard name="Name Surname" />
-                </Link>
-              </div>
-            )}
+            {loaded &&
+              characters.length > 0 &&
+              characters.map((character) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <Link to={`/characterprofile/${character.id}`}>
+                    <CharacterCard name={character.name} />
+                  </Link>
+                </div>
+              ))()}
           </div>
         </div>
       </div>
