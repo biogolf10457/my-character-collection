@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard";
 import { PiPersonArmsSpreadDuotone } from "react-icons/pi";
 
-const Profile = () => {
+const Profile = ({ setUserid }) => {
   const [name, setName] = useState("");
-  const [characters, setCharacters] = useState([""]);
-  const [loaded, setLoaded] = useState(true);
+  const [characters, setCharacters] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -18,6 +18,8 @@ const Profile = () => {
         });
         const data = await res.json();
         setName(data.user.username);
+        setUserid(data.user.id);
+        setLoaded(true);
         console.log(data.user);
       } catch (error) {
         console.error(error.message);

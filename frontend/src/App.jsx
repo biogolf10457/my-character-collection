@@ -16,6 +16,7 @@ import PublicRoute from "./components/PublicRoute";
 
 function App() {
   const [auth, setAuth] = useState(!!localStorage.getItem("token"));
+  const [userid, setUserid] = useState(null);
 
   return (
     <Router>
@@ -42,23 +43,23 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
-                <Profile />
+              <ProtectedRoute setAuth={setAuth}>
+                <Profile setUserid={setUserid} />
               </ProtectedRoute>
             }
           />
           <Route
             path="/createcharacter"
             element={
-              <ProtectedRoute>
-                <CreateCharacter />
+              <ProtectedRoute setAuth={setAuth}>
+                <CreateCharacter userid={userid} />
               </ProtectedRoute>
             }
           />
           <Route
             path="/characterprofile/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute setAuth={setAuth}>
                 <CharacterProfile />
               </ProtectedRoute>
             }
@@ -66,7 +67,7 @@ function App() {
           <Route
             path="/characterprofile/:id/edit"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute setAuth={setAuth}>
                 <CharacterProfileEdit />
               </ProtectedRoute>
             }
