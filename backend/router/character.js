@@ -74,9 +74,10 @@ characterRouter.delete("/characterprofile/:id/delete", async (req, res) => {
   const { id } = req.params;
 
   try {
-    await Product.findByIdAndDelete(id);
+    await Character.findByIdAndDelete(id);
     res.status(200).json({ success: true, message: "Character deleted." });
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 });
