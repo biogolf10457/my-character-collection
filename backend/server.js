@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import authRouter from "./router/auth.js";
 import protectedRouter from "./router/protected.js";
+import characterRouter from "./router/character.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json()); // middleware that allow app to accept JSON data in req
 
 app.use("/api/auth", authRouter);
 app.use("/api", protectedRouter);
+app.use("/api", characterRouter);
 
 app.listen(PORT, () => {
   connectDB();
