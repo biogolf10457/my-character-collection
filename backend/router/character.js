@@ -40,7 +40,7 @@ characterRouter.get("/charactercollection/:userid", async (req, res) => {
     res.status(200).json({ success: true, data: charactersByNameAndId });
   } catch (error) {
     console.log("Error fetching characters:", error);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 });
 
@@ -51,7 +51,7 @@ characterRouter.get("/characterprofile/:id", async (req, res) => {
     res.status(200).json({ success: true, data: character });
   } catch (error) {
     console.log("Error fetching character:", error);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 });
 
@@ -66,7 +66,18 @@ characterRouter.put("/characterprofile/:id/edit", async (req, res) => {
     res.status(200).json({ success: true, data: updatedCharacter });
   } catch (error) {
     console.log("update character error:", error);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error." });
+  }
+});
+
+characterRouter.delete("/characterprofile/:id/delete", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Product.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: "Character deleted." });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error." });
   }
 });
 
