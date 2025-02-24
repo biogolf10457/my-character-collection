@@ -99,10 +99,6 @@ const CreateCharacter = ({ userid }) => {
     }
   };
 
-  const onSelectFile = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-  };
   return (
     <div className="relative min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <form onSubmit={handleSubmit}>
@@ -127,6 +123,7 @@ const CreateCharacter = ({ userid }) => {
                   />
                 </div>
                 <button
+                  type="button"
                   className="absolute -bottom-3 left-1/2 -translate-x-1/2 p-1 bg-slate-200  hover:bg-slate-300 rounded-full border-2 border-slate-400  hover:cursor-pointer"
                   onClick={() => setModalOpen(true)}
                 >
