@@ -44,4 +44,15 @@ characterRouter.get("/charactercollection/:userid", async (req, res) => {
   }
 });
 
+characterRouter.get("/characterprofile/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const character = await Character.findById(id);
+    res.status(200).json({ success: true, data: character });
+  } catch (error) {
+    console.log("Error fetching character:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
 export default characterRouter;
