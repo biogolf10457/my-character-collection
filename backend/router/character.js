@@ -35,6 +35,7 @@ characterRouter.get("/charactercollection/:userid", async (req, res) => {
     const charactersByNameAndId = characters.map((character) => ({
       name: character.name,
       id: character._id,
+      image: character.image,
     }));
     res.status(200).json({ success: true, data: charactersByNameAndId });
   } catch (error) {
