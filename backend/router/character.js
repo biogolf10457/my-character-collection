@@ -55,4 +55,19 @@ characterRouter.get("/characterprofile/:id", async (req, res) => {
   }
 });
 
+characterRouter.put("/characterprofile/:id/edit", async (req, res) => {
+  const { id } = req.params;
+  const character = req.body;
+
+  try {
+    const updatedCharacter = await Character.findByIdAndUpdate(id, character, {
+      new: true,
+    });
+    res.status(200).json({ success: true, data: updatedCharacter });
+  } catch (error) {
+    console.log("update character error:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
 export default characterRouter;
