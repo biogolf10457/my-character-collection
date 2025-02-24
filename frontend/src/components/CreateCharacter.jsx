@@ -112,8 +112,8 @@ const CreateCharacter = ({ userid }) => {
           <h1 className="font-chewy text-3xl">Create Character</h1>
         </div>
         <div className="relative px-4 py-8 bg-orange-300 rounded-2xl shadow-lg">
-          <div className="w-full flex">
-            <div className="w-1/3 flex flex-col items-center justify-center">
+          <div className="w-full flex flex-col lg:flex-row items-start space-y-10 lg:space-y-0">
+            <div className="w-full lg:w-1/3 flex flex-col items-center justify-center">
               <div className="relative w-1/2 aspect-square ">
                 <div className="w-full h-full bg-white rounded-full border-amber-900 border-4 overflow-hidden">
                   <img
@@ -195,13 +195,13 @@ const CreateCharacter = ({ userid }) => {
                 </div>
               </div>
             </div>
-            <div className="w-2/3">
+            <div className="w-full lg:w-2/3">
               <textarea
                 name="information"
                 value={formData.information}
                 placeholder="character information"
                 onChange={handleChange}
-                className="w-full min-h-full p-2 bg-white rounded-md"
+                className="w-full min-h-[70vh] p-2 bg-white rounded-md"
               />
             </div>
           </div>

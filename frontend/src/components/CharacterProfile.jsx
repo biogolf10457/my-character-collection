@@ -72,8 +72,8 @@ const CharacterProfile = () => {
         </button>
       </div>
       <div className="relative min-h-[70vh] px-4 py-8 bg-orange-300 rounded-2xl shadow-lg">
-        <div className="w-full flex">
-          <div className="w-1/3 flex flex-col items-center justify-center">
+        <div className="w-full flex flex-col lg:flex-row items-start space-y-10 lg:space-y-0">
+          <div className="w-full lg:w-1/3 flex flex-col items-center justify-center">
             <div className="w-1/2 aspect-square bg-white rounded-full border-amber-900 border-4 overflow-hidden">
               <img
                 className="w-full h-full object-contain"
@@ -105,7 +105,7 @@ const CharacterProfile = () => {
               </div>
             </div>
           </div>
-          <div className="w-2/3 whitespace-pre-line break-words">
+          <div className="w-full lg:w-2/3 whitespace-pre-line break-words">
             {characterData.information === ""
               ? "No information."
               : characterData.information}
