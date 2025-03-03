@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
 
 const CharacterProfile = () => {
+  const token = localStorage.getItem("token");
   const { id } = useParams();
   const navigate = useNavigate();
   const [characterData, setCharacterData] = useState({
@@ -20,7 +21,7 @@ const CharacterProfile = () => {
   const handleDelete = async () => {
     const res = await fetch(
       `http://localhost:3000/api/characterprofile/${id}/delete`,
-      { method: "DELETE" }
+      { method: "DELETE", headers: { "x-auth-token": token } }
     );
 
     const data = await res.json();

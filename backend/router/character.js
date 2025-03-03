@@ -93,16 +93,37 @@ characterRouter.put("/characterprofile/:id/edit", auth, async (req, res) => {
   }
 });
 
-characterRouter.delete("/characterprofile/:id/delete", async (req, res) => {
-  const { id } = req.params;
+characterRouter.delete(
+  "/characterprofile/:id/delete",
+  auth,
+  async (req, res) => {
+    const { id } = req.params;
 
-  try {
-    await Character.findByIdAndDelete(id);
-    res.status(200).json({ success: true, message: "Character deleted." });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ success: false, message: "Internal Server Error." });
+    try {
+      const user = await User.findById(req.user);
+      if (!user) {
+        return res
+          .status(500)
+          .json({ success: false, message: "Internal server error." });
+      }
+
+      const oldCharacter = await Character.findById(id);
+      if (String(user._id) !== oldCharacter.ownerid) {
+        return res.status(401).json({
+          success: false,
+          message: "You do not have permission to do this operation.",
+        });
+      }
+
+      await Character.findByIdAndDelete(id);
+      res.status(200).json({ success: true, message: "Character deleted." });
+    } catch (error) {
+      console.log(error.message);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error." });
+    }
   }
-});
+);
 
 export default characterRouter;
