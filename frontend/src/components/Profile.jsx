@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard";
 import { PiPersonArmsSpreadDuotone } from "react-icons/pi";
 
-const Profile = ({ setUserid }) => {
+const Profile = () => {
   const [name, setName] = useState("");
   const [characters, setCharacters] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -18,7 +18,6 @@ const Profile = ({ setUserid }) => {
         });
         const data = await res.json();
         setName(data.user.username);
-        setUserid(data.user.id);
 
         const res2 = await fetch(
           `http://localhost:3000/api/charactercollection/${data.user.id}`,
