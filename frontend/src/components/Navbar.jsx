@@ -1,10 +1,20 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import mascotIcon from "../assets/mccIcon.png";
 import { MdLogout } from "react-icons/md";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = ({ auth, setAuth }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setAuth(false);
+    }
+  }, [location]);
+
   const handleLogout = async () => {
     localStorage.removeItem("token");
     await setAuth(false);
