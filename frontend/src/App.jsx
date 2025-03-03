@@ -16,7 +16,6 @@ import PublicRoute from "./components/PublicRoute";
 
 function App() {
   const [auth, setAuth] = useState(!!localStorage.getItem("token"));
-  const [userid, setUserid] = useState(null);
 
   return (
     <Router>
