@@ -6,7 +6,7 @@ import { MdLogout } from "react-icons/md";
 const Navbar = ({ auth, setAuth }) => {
   const navigate = useNavigate();
   const handleLogout = async () => {
-    await localStorage.removeItem("token");
+    localStorage.removeItem("token");
     await setAuth(false);
     navigate("/");
   };
