@@ -52,7 +52,7 @@ function App() {
             path="/createcharacter"
             element={
               <ProtectedRoute>
-                <CreateCharacter userid={userid} />
+                <CreateCharacter />
               </ProtectedRoute>
             }
           />

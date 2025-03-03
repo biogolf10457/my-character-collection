@@ -20,7 +20,6 @@ const Profile = ({ setUserid }) => {
         setName(data.user.username);
         setUserid(data.user.id);
 
-        console.log(data.user);
         const res2 = await fetch(
           `http://localhost:3000/api/charactercollection/${data.user.id}`,
           { method: "GET" }
@@ -28,7 +27,6 @@ const Profile = ({ setUserid }) => {
         const data2 = await res2.json();
         setCharacters(data2.data);
         setLoaded(true);
-        console.log(data2.data);
       } catch (error) {
         console.error(error.message);
       }

@@ -1,13 +1,21 @@
 import express from "express";
 import Character from "../models/Character.model.js";
+import auth from "../middleware/auth.js";
+import User from "../models/User.model.js";
 
 const characterRouter = express.Router();
 
-characterRouter.post("/createcharacter", async (req, res) => {
-  const { name, gender, age, height, weight, image, information, ownerid } =
-    req.body;
+characterRouter.post("/createcharacter", auth, async (req, res) => {
+  const { name, gender, age, height, weight, image, information } = req.body;
 
   try {
+    const user = await User.findById(req.user);
+    if (!user) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error." });
+    }
+    const ownerid = user._id;
     const newCharacter = new Character({
       name,
       gender,

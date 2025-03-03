@@ -4,7 +4,8 @@ import noImage from "../assets/noImage.jpg";
 import UploadImageModal from "./UploadImageModal";
 import { useNavigate } from "react-router-dom";
 
-const CreateCharacter = ({ userid }) => {
+const CreateCharacter = () => {
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +77,6 @@ const CreateCharacter = ({ userid }) => {
         weight: formData.weight,
         image: uploadImageURL,
         information: formData.information,
-        ownerid: userid,
       };
       console.log(submitData);
 
@@ -84,7 +84,10 @@ const CreateCharacter = ({ userid }) => {
         "http://localhost:3000/api/createcharacter",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": token,
+          },
           body: JSON.stringify(submitData),
         }
       );
