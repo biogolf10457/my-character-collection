@@ -5,6 +5,7 @@ import UploadImageModal from "./UploadImageModal";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CharacterProfileEdit = () => {
+  const token = localStorage.getItem("token");
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -84,7 +85,10 @@ const CharacterProfileEdit = () => {
         `http://localhost:3000/api/characterprofile/${id}/edit`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": token,
+          },
           body: JSON.stringify(submitData),
         }
       );
