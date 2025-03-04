@@ -80,7 +80,7 @@ const CreateCharacter = () => {
         information: formData.information,
       };
 
-      const createCharacterRes = await fetch(`/api/createcharacter`, {
+      const createCharacterRes = await fetch(`${baseUrl}/api/createcharacter`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
