@@ -17,58 +17,82 @@ const CharacterProfile = () => {
     information: "",
     image: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/characterprofile/${id}/delete`,
-      { method: "DELETE", headers: { "x-auth-token": token } }
-    );
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/characterprofile/${id}/delete`,
+        { method: "DELETE", headers: { "x-auth-token": token } }
+      );
 
-    const data = await res.json();
-    if (!data.success) {
-      alert(data.message);
-    } else {
-      navigate("/profile");
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message);
+      } else {
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.error(error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(
-        `http://localhost:3000/api/characterprofile/${id}`,
-        { method: "GET" }
-      );
-      const data = await res.json();
-      setCharacterData({
-        name: data.data.name,
-        gender: data.data.gender,
-        age: data.data.age,
-        height: data.data.height,
-        weight: data.data.weight,
-        information: data.data.information,
-        image: data.data.image,
-      });
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/characterprofile/${id}`,
+          { method: "GET" }
+        );
+        const data = await res.json();
+        setCharacterData({
+          name: data.data.name,
+          gender: data.data.gender,
+          age: data.data.age,
+          height: data.data.height,
+          weight: data.data.weight,
+          information: data.data.information,
+          image: data.data.image,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      setIsLoading(false);
     }
     fetchData();
   }, []);
+
   return (
     <div className="min-h-screen px-4 py-6 sm:px-8 lg:px-12 lg:py-10 bg-linear-to-b from-amber-100 to-amber-200">
       <div className="flex pr-2 pb-2 justify-end space-x-4">
         <Link to={`/characterprofile/${id}/edit`}>
           <button
             type="button"
-            className="pl-2.5 pr-2 pt-1 pb-2 bg-slate-200 rounded-lg hover:bg-slate-300 hover:cursor-pointer inset-shadow-2xs"
+            className="pl-2.5 pr-2 pt-1 pb-2 bg-slate-200 rounded-lg inset-shadow-2xs hover:bg-slate-300 hover:cursor-pointer disabled:bg-gray-500 disabled:text-slate-100 disabled:cursor-not-allowed"
+            disabled={isLoading}
           >
-            <FaEdit className="inline-block align-middle" />
+            {isLoading ? (
+              <div className="loading-spin inline-block align-middle max-w-4 max-h-4 mr-1"></div>
+            ) : (
+              <FaEdit className="inline-block align-middle" />
+            )}
             <span className="pl-1 align-middle">Edit</span>
           </button>
         </Link>
         <button
           type="button"
-          className="pl-2.5 pr-2 pt-1 pb-2 bg-red-400 rounded-lg hover:bg-red-500 hover:cursor-pointer inset-shadow-2xs"
+          className="pl-2.5 pr-2 pt-1 pb-2 bg-red-400 rounded-lg inset-shadow-2xs hover:bg-red-500 hover:cursor-pointer disabled:bg-gray-600 disabled:text-slate-100 disabled:cursor-not-allowed"
           onClick={handleDelete}
+          disabled={isLoading}
         >
-          <MdDeleteForever className="text-lg inline-block align-middle" />
+          {isLoading ? (
+            <div className="loading-spin inline-block align-middle max-w-4 max-h-4 mr-1"></div>
+          ) : (
+            <MdDeleteForever className="text-lg inline-block align-middle" />
+          )}
           <span className="pl-1 align-middle">Delete</span>
         </button>
       </div>
