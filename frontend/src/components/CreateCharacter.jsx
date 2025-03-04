@@ -16,8 +16,8 @@ const CreateCharacter = () => {
     information: "",
     image: "",
   });
-
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,6 +47,7 @@ const CreateCharacter = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       var uploadImageURL = "";
       if (formData.image !== "") {
@@ -78,7 +79,6 @@ const CreateCharacter = () => {
         image: uploadImageURL,
         information: formData.information,
       };
-      console.log(submitData);
 
       const createCharacterRes = await fetch(
         "http://localhost:3000/api/createcharacter",
@@ -100,6 +100,7 @@ const CreateCharacter = () => {
     } catch (error) {
       console.error(error.message);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -210,8 +211,11 @@ const CreateCharacter = () => {
           </div>
         </div>
         <div className="flex items-center justify-center mt-8">
-          <button type="submit" className="button">
-            Create
+          <button type="submit" className="button" disabled={isLoading}>
+            {isLoading && (
+              <div className="loading-spin inline-flex align-middle max-w-6 max-h-6 mr-2"></div>
+            )}
+            <div className="inline-flex align-middle">Create</div>
           </button>
         </div>
       </form>

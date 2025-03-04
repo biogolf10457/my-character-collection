@@ -19,6 +19,7 @@ const CharacterProfileEdit = () => {
   });
   const [newImage, setNewImage] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,6 +49,7 @@ const CharacterProfileEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       var uploadImageURL = formData.image;
       if (newImage !== "") {
@@ -101,24 +103,31 @@ const CharacterProfileEdit = () => {
     } catch (error) {
       console.error(error.message);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(
-        `http://localhost:3000/api/characterprofile/${id}`,
-        { method: "GET" }
-      );
-      const data = await res.json();
-      setFormData({
-        name: data.data.name,
-        gender: data.data.gender,
-        age: data.data.age,
-        height: data.data.height,
-        weight: data.data.weight,
-        information: data.data.information,
-        image: data.data.image,
-      });
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/characterprofile/${id}`,
+          { method: "GET" }
+        );
+        const data = await res.json();
+        setFormData({
+          name: data.data.name,
+          gender: data.data.gender,
+          age: data.data.age,
+          height: data.data.height,
+          weight: data.data.weight,
+          information: data.data.information,
+          image: data.data.image,
+        });
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -236,8 +245,11 @@ const CharacterProfileEdit = () => {
           </div>
         </div>
         <div className="flex items-center justify-center mt-8">
-          <button type="submit" className="button">
-            Confirm
+          <button type="submit" className="button" disabled={isLoading}>
+            {isLoading && (
+              <div className="loading-spin inline-flex align-middle max-w-6 max-h-6 mr-2"></div>
+            )}
+            <div className="inline-flex align-middle">Confirm</div>
           </button>
         </div>
       </form>
