@@ -3,6 +3,7 @@ import { MdEdit } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
 import UploadImageModal from "./UploadImageModal";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../../config";
 
 const CreateCharacter = () => {
   const token = localStorage.getItem("token");
@@ -79,17 +80,14 @@ const CreateCharacter = () => {
         information: formData.information,
       };
 
-      const createCharacterRes = await fetch(
-        "http://localhost:3000/api/createcharacter",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": token,
-          },
-          body: JSON.stringify(submitData),
-        }
-      );
+      const createCharacterRes = await fetch(`${baseUrl}/api/createcharacter`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(submitData),
+      });
       const createCharacterData = await createCharacterRes.json();
       if (!createCharacterData.success) {
         alert(createCharacterData.message);

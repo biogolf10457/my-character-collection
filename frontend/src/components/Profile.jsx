@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard";
 import { PiPersonArmsSpreadDuotone } from "react-icons/pi";
+import baseUrl from "../../config";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("http://localhost:3000/api/protected", {
+        const res = await fetch(`${baseUrl}/api/protected`, {
           method: "GET",
           headers: { "x-auth-token": token },
         });
@@ -20,7 +21,7 @@ const Profile = () => {
         setName(data.user.username);
 
         const res2 = await fetch(
-          `http://localhost:3000/api/charactercollection/${data.user.id}`,
+          `${baseUrl}/api/charactercollection/${data.user.id}`,
           { method: "GET" }
         );
         const data2 = await res2.json();

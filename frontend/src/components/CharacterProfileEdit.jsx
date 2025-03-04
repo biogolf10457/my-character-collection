@@ -3,6 +3,7 @@ import { MdEdit } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
 import UploadImageModal from "./UploadImageModal";
 import { useNavigate, useParams } from "react-router-dom";
+import baseUrl from "../../config";
 
 const CharacterProfileEdit = () => {
   const token = localStorage.getItem("token");
@@ -82,7 +83,7 @@ const CharacterProfileEdit = () => {
       };
 
       const updateCharacterRes = await fetch(
-        `http://localhost:3000/api/characterprofile/${id}/edit`,
+        `${baseUrl}/api/characterprofile/${id}/edit`,
         {
           method: "PUT",
           headers: {
@@ -108,10 +109,9 @@ const CharacterProfileEdit = () => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/characterprofile/${id}`,
-          { method: "GET" }
-        );
+        const res = await fetch(`${baseUrl}/api/characterprofile/${id}`, {
+          method: "GET",
+        });
         const data = await res.json();
         setFormData({
           name: data.data.name,

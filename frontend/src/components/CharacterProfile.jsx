@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import noImage from "../assets/noImage.jpg";
+import baseUrl from "../../config";
 
 const CharacterProfile = () => {
   const token = localStorage.getItem("token");
@@ -22,10 +23,10 @@ const CharacterProfile = () => {
   const handleDelete = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(
-        `http://localhost:3000/api/characterprofile/${id}/delete`,
-        { method: "DELETE", headers: { "x-auth-token": token } }
-      );
+      const res = await fetch(`${baseUrl}/api/characterprofile/${id}/delete`, {
+        method: "DELETE",
+        headers: { "x-auth-token": token },
+      });
 
       const data = await res.json();
       if (!data.success) {
@@ -43,10 +44,9 @@ const CharacterProfile = () => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/characterprofile/${id}`,
-          { method: "GET" }
-        );
+        const res = await fetch(`${baseUrl}/api/characterprofile/${id}`, {
+          method: "GET",
+        });
         const data = await res.json();
         setCharacterData({
           name: data.data.name,
