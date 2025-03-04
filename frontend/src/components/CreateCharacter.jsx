@@ -67,7 +67,6 @@ const CreateCharacter = () => {
 
         const uploadImage = await res.json();
         uploadImageURL = uploadImage.url;
-        console.log(uploadImageURL);
       }
 
       const submitData = {

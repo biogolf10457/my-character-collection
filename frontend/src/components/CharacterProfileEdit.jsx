@@ -69,7 +69,6 @@ const CharacterProfileEdit = () => {
 
         const uploadImage = await res.json();
         uploadImageURL = uploadImage.url;
-        console.log(uploadImageURL);
       }
 
       const submitData = {
@@ -81,7 +80,6 @@ const CharacterProfileEdit = () => {
         image: uploadImageURL,
         information: formData.information,
       };
-      console.log("submit:", submitData);
 
       const updateCharacterRes = await fetch(
         `http://localhost:3000/api/characterprofile/${id}/edit`,
@@ -125,7 +123,7 @@ const CharacterProfileEdit = () => {
           image: data.data.image,
         });
       } catch (error) {
-        console.log("Error: ", error);
+        console.error("Error: ", error);
       }
       setIsLoading(false);
     }
