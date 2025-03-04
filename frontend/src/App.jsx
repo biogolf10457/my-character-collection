@@ -13,6 +13,7 @@ import CharacterProfile from "./components/CharacterProfile";
 import CharacterProfileEdit from "./components/CharacterProfileEdit";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import Footer from "./components/Footer";
 
 function App() {
   const [auth, setAuth] = useState(!!localStorage.getItem("token"));
@@ -73,6 +74,7 @@ function App() {
           />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
