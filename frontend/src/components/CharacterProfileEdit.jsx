@@ -83,7 +83,7 @@ const CharacterProfileEdit = () => {
       };
 
       const updateCharacterRes = await fetch(
-        `${baseUrl}/api/characterprofile/${id}/edit`,
+        `/api/characterprofile/${id}/edit`,
         {
           method: "PUT",
           headers: {
@@ -109,7 +109,7 @@ const CharacterProfileEdit = () => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const res = await fetch(`${baseUrl}/api/characterprofile/${id}`, {
+        const res = await fetch(`/api/characterprofile/${id}`, {
           method: "GET",
         });
         const data = await res.json();

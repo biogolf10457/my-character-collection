@@ -44,7 +44,7 @@ const CharacterProfile = () => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const res = await fetch(`${baseUrl}/api/characterprofile/${id}`, {
+        const res = await fetch(`/api/characterprofile/${id}`, {
           method: "GET",
         });
         const data = await res.json();

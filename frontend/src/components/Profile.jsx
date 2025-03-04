@@ -13,17 +13,16 @@ const Profile = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`${baseUrl}/api/protected`, {
+        const res = await fetch(`/api/protected`, {
           method: "GET",
           headers: { "x-auth-token": token },
         });
         const data = await res.json();
         setName(data.user.username);
 
-        const res2 = await fetch(
-          `${baseUrl}/api/charactercollection/${data.user.id}`,
-          { method: "GET" }
-        );
+        const res2 = await fetch(`/api/charactercollection/${data.user.id}`, {
+          method: "GET",
+        });
         const data2 = await res2.json();
         setCharacters(data2.data);
         setLoaded(true);
