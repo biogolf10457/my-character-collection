@@ -181,6 +181,7 @@ const CharacterProfileEdit = () => {
                 <label htmlFor="gender">Gender : </label>
                 <select
                   name="gender"
+                  id="gender"
                   value={formData.gender}
                   onChange={handleChange}
                   className="bg-white rounded-md"
@@ -198,6 +199,7 @@ const CharacterProfileEdit = () => {
                   <input
                     type="text"
                     name="age"
+                    id="age"
                     value={formData.age}
                     placeholder="years"
                     className="w-2/3 bg-white rounded-md"
@@ -210,6 +212,7 @@ const CharacterProfileEdit = () => {
                   <input
                     type="text"
                     name="height"
+                    id="height"
                     value={formData.height}
                     placeholder="cm"
                     className="w-2/3 bg-white rounded-md"
@@ -222,6 +225,7 @@ const CharacterProfileEdit = () => {
                   <input
                     type="text"
                     name="weight"
+                    id="weight"
                     value={formData.weight}
                     placeholder="kg"
                     className="w-2/3 bg-white rounded-md"

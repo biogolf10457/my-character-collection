@@ -51,6 +51,7 @@ const Login = ({ setAuth }) => {
             <input
               type="email"
               name="email"
+              id="email"
               value={formData.email}
               placeholder="Email"
               className="input mb-4"
@@ -63,6 +64,7 @@ const Login = ({ setAuth }) => {
             <input
               type="password"
               name="password"
+              id="password"
               value={formData.password}
               placeholder="Password"
               className="input mb-8"
