@@ -10,6 +10,7 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,6 +18,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await fetch(`${baseUrl}/api/auth/register`, {
         method: "POST",
@@ -33,6 +35,7 @@ const Register = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -83,8 +86,11 @@ const Register = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="button2">
-              Register
+            <button type="submit" className="button2" disabled={isLoading}>
+              {isLoading && (
+                <div className="loading-spin inline-flex align-middle max-w-6 max-h-6 mr-2"></div>
+              )}
+              <div className="inline-flex align-middle">Register</div>
             </button>
           </form>
         </div>

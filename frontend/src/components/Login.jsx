@@ -9,6 +9,7 @@ const Login = ({ setAuth }) => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,6 +17,7 @@ const Login = ({ setAuth }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await fetch(`${baseUrl}/api/auth/login`, {
         method: "POST",
@@ -25,7 +27,7 @@ const Login = ({ setAuth }) => {
       const data = await res.json();
 
       if (!data.success) {
-        alert(data.message);
+        alert("Wrong email or password.");
       } else {
         localStorage.setItem("token", data.token);
         setAuth(true);
@@ -34,6 +36,7 @@ const Login = ({ setAuth }) => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -71,8 +74,11 @@ const Login = ({ setAuth }) => {
               onChange={handleChange}
               required
             />
-            <button type="submit" className="button2">
-              Login
+            <button type="submit" className="button2" disabled={isLoading}>
+              {isLoading && (
+                <div className="loading-spin inline-flex align-middle max-w-6 max-h-6 mr-2"></div>
+              )}
+              <div className="inline-flex align-middle">Login</div>
             </button>
           </form>
         </div>
