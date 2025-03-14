@@ -81,6 +81,12 @@ const Login = ({ setAuth }) => {
               <div className="inline-flex align-middle">Login</div>
             </button>
           </form>
+          {isLoading && (
+            <p className="mt-4 text-center">
+              *Note: It's may take a minute to start the service. Sorry for the
+              inconvenience.
+            </p>
+          )}
         </div>
       </div>
     </div>

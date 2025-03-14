@@ -93,6 +93,12 @@ const Register = () => {
               <div className="inline-flex align-middle">Register</div>
             </button>
           </form>
+          {isLoading && (
+            <p className="mt-4 text-center">
+              *Note: It's may take a minute to start the service. Sorry for the
+              inconvenience.
+            </p>
+          )}
         </div>
       </div>
     </div>
